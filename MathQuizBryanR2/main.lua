@@ -1,12 +1,13 @@
 display.setStatusBar(display.HiddenStatusBar)
 
-local lives
+local lives = 3
 local heart1
 local heart2
 local heart3
 local questionObject
 local correctObject
 local incorrectObject
+local score = 0
 local scoreObject
 local randomNumber1
 local randomNumber2
@@ -20,6 +21,15 @@ local randomOperator
 local rounder
 local correctAnswer
 
+heart3 = display.newImageRect("Images/Heart.png", 100, 100)
+heart3.x = display.contentWidth * 5 / 8
+heart3.y = display.contentHeight * 1 / 7
+heart2 = display.newImageRect("Images/Heart.png", 100, 100)
+heart2.x = display.contentWidth * 6 / 8
+heart2.y = display.contentHeight * 1 / 7
+heart1 = display.newImageRect("Images/Heart.png", 100, 100)
+heart1.x = display.contentWidth * 7 / 8
+heart1.y = display.contentHeight * 1 / 7
 
 local function UpdateTime()
 	secondsLeft = secondsLeft - 1
@@ -99,7 +109,7 @@ local function Askquestion()
 		correctAnswer = math.round( correctAnswer )
 
 
-		questionObject.text = randomNumber1 .. " / " .. " = "
+		questionObject.text = randomNumber1 .. " / " .. randomNumber2 .. " = "
 	end	
 end
 
@@ -140,7 +150,7 @@ local function NumericFieldListener( event )
 		   timer.performWithDelay(2000, HideCorrect)
 
 	    elseif event.phase == "submitted" then
-		   if (userAnswer == correctAnswer) then
+		   if (userAnswer +- correctAnswer) then
 			   lives = lives - 1
 			   correctObject.isVisable = false
 			   incorrectObject.isvisable = true
@@ -150,7 +160,7 @@ local function NumericFieldListener( event )
     end
 end	
 
-local function startTimer()
+local function StartTimer()
 
 	countDownTimer = timer.performWithDelay( 1000, UpdateTime, 0)
 end
@@ -176,18 +186,10 @@ numericField.inputType = "number"
 
 numericField:addEventListener( "userInput", NumericFieldListener)
 
-heart3 = display.newImageRect("Images/heart.png", 100, 100)
-heart3.x = display.contentWidth * 5 / 8
-heart3.y = display.contentHeight * 1 / 7
-heart2 = display.newImageRect("Images/heart.png", 100, 100)
-heart2.x = display.contentWidth * 6 / 8
-heart2.y = display.contentHeight * 1 / 7
-heart1 = display.newImageRect("Images/heart.png", 100, 100)
-heart1.x = display.contentWidth * 7 / 8
-heart1.y = display.contentHeight * 1 / 7
+
 
 clockText = display.newText( "" .. secondsLeft .. "", display.contentHeight*1/7, display.contentWidth*1/9, nil, 50 )
 scoreObject = display.newText( "" .. score .. "", display.contentHeight*3/7, display.contentWidth*1/9, nil, 50 )
 
-startTimer()
+StartTimer()
 Askquestion()
