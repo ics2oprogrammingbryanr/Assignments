@@ -7,6 +7,7 @@ display.setStatusBar(display.HiddenStatusBar)
 -- global variables
 scrollspeed = 3
 scrollspeed2 = 6
+
 -- background image with width and height
 local backgrondgroundImage = display.newImageRect("Images/Grass.jfif", 2048, 1536)
 
@@ -47,6 +48,8 @@ local function MoveHummingbird(event)
 	hummingbird.y = hummingbird.y - scrollspeed2
 	-- change the transparency of the hummingbird every time it moves so that it fades out
 	hummingbird.alpha = hummingbird.alpha + 0.02
+	-- size up hummingbird
+    hummingbird:scale(1.004, 1.004)
 end
 
 -- MoveHummingbird will be called over and over again
@@ -63,6 +66,8 @@ local function MoveBird(event)
 	bird.y = bird.y - scrollspeed
 	-- change the transparency of bird every time it move so that it fades out
 	bird.alpha = bird.alpha + 0.01
+	-- size up bird
+	bird:scale(1.003, 1.003)
 end
 
 -- MoveBird will be called over and over again
@@ -75,6 +80,8 @@ local function MoveCycle(event)
 	cycle.y = cycle.y - scrollspeed2
     -- change the transparency of the cycle every time it moves so that it fades out
     cycle.alpha = cycle.alpha + 0.02
+    -- size up cycle
+    cycle:scale(1.003, 1.003)
 end
 
 -- MoveCycle will be called over and over again
